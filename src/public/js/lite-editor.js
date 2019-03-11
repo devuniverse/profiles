@@ -644,7 +644,7 @@ var aTemplate = function () {
         var html = _this5.getHtml(tem);
         var target = (0, _util.selector)('[data-id=\'' + tem + '\']');
         if (!target) {
-          (0, _util.selector)(query).insertAdjacentHTML('afterend', '<div  data-id="' + tem + '"></div>');
+          (0, _util.selector)(query).insertAdjacentHTML('afterend', '<div  class="fullwidth" data-id="' + tem + '"></div>');
           if (renderWay === 'text') {
             (0, _util.selector)('[data-id=\'' + tem + '\']').innerText = html;
           } else {
@@ -658,7 +658,7 @@ var aTemplate = function () {
           var partHtml = doc.querySelector(part).outerHTML;
           (0, _morphdom2.default)(target.querySelector(part), partHtml);
         } else {
-          (0, _morphdom2.default)(target, '<div  data-id=\'' + tem + '\'>' + html + '</div>');
+          (0, _morphdom2.default)(target, '<div class="fullwidth" data-id=\'' + tem + '\'>' + html + '</div>');
         }
         var template = _this5.atemplate.find(function (item) {
           return item.id === tem;
