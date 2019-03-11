@@ -21,7 +21,7 @@ return [
   'yields' => [
       'head'   => 'css',
       'footer' => 'js',
-      'profiles-content'=>'profiles-content'
+      'profiles-content'=>'content'
   ],
   /**
    *|

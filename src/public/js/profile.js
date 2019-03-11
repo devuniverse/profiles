@@ -84,10 +84,10 @@
             originalHeight: 0,
             originaly: 0,
             originalX: 0,
-            minWidth: 350,
-            minHeight: 350,
-            maxWidth: 1000,
-            maxHeight: 1000
+            minWidth: 50,
+            minHeight: 50,
+            maxWidth: 2000,
+            maxHeight: 2000
         };
 
         /**
@@ -674,7 +674,7 @@
 
             self.imageHelperCanvas = canvas;
             self.imageHelperCanvasContext = canvas.getContext('2d');
-            self.imageHelperCanvasContext.mozImageSmoothingEnabled = false;
+            self.imageHelperCanvasContext.imageSmoothingEnabled = false;
                       self.imageHelperCanvasContext.msImageSmoothingEnabled = false;
             self.imageHelperCanvasContext.imageSmoothingEnabled = false;
         }
@@ -716,23 +716,27 @@ $(function() {
         var dis      = $(this);
         var imageUrl = p.getAsDataURL();
         var token = $('meta[name="csrf-token"]').prop('content');
-
+        var urlX  = profilePath+'/update';
         dis.prepend('<i class="fa fa-spinner fa-spin"></i>');
         $('.preview').show().attr('src',imageUrl);
+        $('input[name="imageurldata"]').val(imageUrl);
 
-        $.ajax({
-            url: '/dashboard/profile/update',
-            type: 'POST',
-            data: {
-                _token: token,
-                image: imageUrl,
-            },
-            dataType: 'JSON',
-            success: function(response) {
-              alert(JSON.stringify(response));
-              $('#previewBtn').find('i').remove();
-            }
-        });
+        // $.ajax({
+        //     url: urlX,
+        //     type: 'POST',
+        //     data: {
+        //         _token: token,
+        //         image: imageUrl,
+        //     },
+        //     dataType: 'JSON',
+        //     success: function(response) {
+        //       alert(JSON.stringify(response));
+        //       $('#previewBtn').find('i').remove();
+        //     },
+        //     error : function(errors){
+        //       alert(JSON.stringify(errors));
+        //     }
+        // });
 
       });
 

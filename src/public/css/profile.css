@@ -425,3 +425,30 @@
     box-shadow: 0 8px 10px 1px;
     padding: 1rem;
 }
+#previewBtn {
+    width: 12rem;
+    display: block;
+    margin: 16px auto;
+}
+.row{
+  margin-bottom: 1rem;
+}
+input[type="password"] {
+    border-radius: 0;
+    border: none;
+    box-shadow: 0 0 10px 0 inset #ccc;
+    min-height: 2.5rem;
+    vertical-align: middle;
+}
+.red {
+    color: red;
+}
+.blue {
+    color: blue;
+}
+.yellow {
+    color: yellow;
+}
+.fullwidth {
+    width: 100%;
+}

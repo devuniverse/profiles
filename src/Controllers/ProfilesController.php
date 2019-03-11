@@ -19,15 +19,16 @@ class ProfilesController extends Controller
     return view('profiles::profile', compact('files'));
   }
   public function updateAvatar(Request $request){
-    $image = $request->image;
-    $userid= Auth::user()->id;
+    $image = $request->imageurldata;
+    $userid= \Auth::user()->id;
     $filePath = 'uploads/profiles/'. str_random(12) . '.jpg';
     $s3 = \Storage::disk('s3');
     $imageAmazoned = $s3->put($filePath, file_get_contents($image), 'public');
     if($imageAmazoned){
+      
       $message = _i('Uploaded');
       $msgtype = 1;
-
+      return redirect('/'.Config::get('profiles.profiles_url'))->with( ['theresponse'=>["message"=> $message, "msgtype"=>$msgtype]] );
     }else{
       $message = _i('Uploaded');
       $msgtype = 0;
