@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Storage;
 class ProfilesController extends Controller
 {
   public function loadIndex(){
-    $files = [];
-    return view('profiles::profile', compact('files'));
+    return view('profiles::profile');
   }
   public function updateAvatar(Request $request){
     $image = $request->imageurldata;
@@ -25,7 +24,7 @@ class ProfilesController extends Controller
     $s3 = \Storage::disk('s3');
     $imageAmazoned = $s3->put($filePath, file_get_contents($image), 'public');
     if($imageAmazoned){
-      
+
       $message = _i('Uploaded');
       $msgtype = 1;
       return redirect('/'.Config::get('profiles.profiles_url'))->with( ['theresponse'=>["message"=> $message, "msgtype"=>$msgtype]] );

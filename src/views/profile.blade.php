@@ -4,11 +4,12 @@
     @if(Config::get('profiles.includes.fontawesome'))
       <link rel="stylesheet" href="{{ url('/profiles/assets/fontawesome/css/all.css') }}">
     @endif
-    <link rel="stylesheet" href="{{ url('/profiles/assets/css/dropzone.css') }}">
     @if(Config::get('profiles.includes.animate'))
       <link rel="stylesheet" href="{{ url('/profiles/assets/css/animate.css') }}">
     @endif
+    @if(Config::get('profiles.includes.animate'))
     <link rel="stylesheet" href="{{ url('/profiles/assets/css/nexus.css') }}">
+    @endif
     <link rel="stylesheet" href="{{ url('/profiles/assets/css/styled.css') }}">
     <link rel="stylesheet" href="{{ url('/profiles/assets/css/custom.css') }}">
     <link rel="stylesheet" href="{{ url('/profiles/assets/css/profile.css') }}">

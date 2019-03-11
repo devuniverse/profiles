@@ -29,7 +29,8 @@ return [
   'includes' => [
       'jquery'   => true,
       'animate' => true,
-      'fontawesome' => true
+      'fontawesome' => true,
+      'nexus' => false
   ],
   'override_default' => false
 ];
