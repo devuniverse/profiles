@@ -688,19 +688,12 @@
     }
 })(window, jQuery);
 
-
-
-
-
-
-
-
 $(function() {
 
 /**
      * DEMO
      */
-    var p = new profilePicture('.profile', null,
+    var p = new profilePicture('.profile', userAvPath,
         {
           imageHelper: true,
             onRemove: function (type) {
@@ -712,7 +705,8 @@ $(function() {
         });
 
 
-    $('#previewBtn').on('click', function() {
+    $('#previewBtn').on('click', function(event) {
+        event.preventDefault();
         var dis      = $(this);
         var imageUrl = p.getAsDataURL();
         var token = $('meta[name="csrf-token"]').prop('content');
@@ -721,22 +715,22 @@ $(function() {
         $('.preview').show().attr('src',imageUrl);
         $('input[name="imageurldata"]').val(imageUrl);
 
-        // $.ajax({
-        //     url: urlX,
-        //     type: 'POST',
-        //     data: {
-        //         _token: token,
-        //         image: imageUrl,
-        //     },
-        //     dataType: 'JSON',
-        //     success: function(response) {
-        //       alert(JSON.stringify(response));
-        //       $('#previewBtn').find('i').remove();
-        //     },
-        //     error : function(errors){
-        //       alert(JSON.stringify(errors));
-        //     }
-        // });
+        $.ajax({
+            url: urlX,
+            type: 'POST',
+            data: {
+                _token: token,
+                image: imageUrl,
+            },
+            dataType: 'JSON',
+            success: function(response) {
+              alert(JSON.stringify(response));
+              $('#previewBtn').find('i').remove();
+            },
+            error : function(errors){
+              alert(JSON.stringify(errors));
+            }
+        });
 
       });
 
