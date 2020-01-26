@@ -16,7 +16,8 @@
         @yield(Config::get('profiles.yields.profiles-content'))
     </div>
     <script type="text/javascript">
-      var profilesPath = "<?php echo Config::get("profiles.profiles_url") ?>";
+    var profilesPath = "<?php echo Config::get("profiles.profiles_url"); ?>";
+    var userAvPath ="/<?php echo Config::get("profiles.profiles_url"); ?>/display?ref=<?php echo \Crypt::encryptString(\Auth::user()->id); ?>";
     </script>
     @yield(Config::get('profiles.yields.footer'))
 

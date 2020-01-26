@@ -31,12 +31,12 @@
       },
       "minimum-stability": "stable",
       "require": {
-        "laravel/framework": "5.8.*",
-        "Belphemur/laravel-gettext": "6.x",
-        "codiiv/extrameta": "master",
+        "laravel/framework": ">=6.0",
+        "zerospam/laravel-gettext": "^7.2",
+        "codiiv/extrameta": ">=1.0.0",
         "league/flysystem-aws-s3-v3": "~1.0"
       },
       "require-dev": {
-          "laravel/laravel": "5.8.*"
+          "laravel/laravel": ">=6.0"
     }
 }
