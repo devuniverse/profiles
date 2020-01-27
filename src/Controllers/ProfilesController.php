@@ -49,33 +49,41 @@ class ProfilesController extends Controller
   public function display(Request $request){
     $requested = \Crypt::decryptString($request->ref);
     $user = \App\User::find($requested);
-    if($user){
-      $filePath = "https://".env('AWS_BUCKET').".s3.".env('AWS_DEFAULT_REGION').".amazonaws.com/".$user->profile_picture;
+    if($user->id != Auth::user()->id){
+      $message = _i('You are not viewing your own account');
+      $msgtype = 0;
     }else{
-      $filePath = "/images/user.png";
-    }
-    set_time_limit(0);
-    // $songCode = $_REQUEST['c'];
-    $bitrate = 128;
-    $strContext=stream_context_create(
-         array(
-             'http'=>array(
-             'method'=>'GET',
-             'header'=>"Accept-language: en\r\n"
-             )
-         )
-     );
-     header('Content-type: image/jpeg');
-     header ("Content-Transfer-Encoding: binary");
-     header ("Pragma: no-cache");
-     header ("icy-br: " . $bitrate);
+      $s3 = Storage::disk('s3');
+      $exists = $s3->exists($user->profile_picture);
+      if($exists){
+        $filePath = "https://".env('AWS_BUCKET').".s3.".env('AWS_DEFAULT_REGION').".amazonaws.com/".$user->profile_picture;
+      }else{
+        $filePath = public_path("/images/user.png");
+      }
+      set_time_limit(0);
+      // $songCode = $_REQUEST['c'];
+      $bitrate = 128;
+      $strContext=stream_context_create(
+        array(
+          'http'=>array(
+            'method'=>'GET',
+            'header'=>"Accept-language: en\r\n"
+          )
+        )
+      );
+      header('Content-type: image/jpeg');
+      header ("Content-Transfer-Encoding: binary");
+      header ("Pragma: no-cache");
+      header ("icy-br: " . $bitrate);
 
-     $fpOrigin=fopen($filePath, 'rb', false, $strContext);
-     while(!feof($fpOrigin)){
-       $buffer=fread($fpOrigin, 4096);
-       echo $buffer;
-       flush();
-     }
-     fclose($fpOrigin);
+      $fpOrigin=fopen($filePath, 'rb', false, $strContext);
+      while(!feof($fpOrigin)){
+        $buffer=fread($fpOrigin, 4096);
+        echo $buffer;
+        flush();
+      }
+      fclose($fpOrigin);
+    }
+
   }
 }

@@ -17,7 +17,14 @@
     </div>
     <script type="text/javascript">
     var profilesPath = "<?php echo Config::get("profiles.profiles_url"); ?>";
-    var userAvPath ="/<?php echo Config::get("profiles.profiles_url"); ?>/display?ref=<?php echo \Crypt::encryptString(\Auth::user()->id); ?>";
+    <?php
+    $s3 = Storage::disk('s3');
+    $exists = $s3->exists($user->profile_picture);
+     if($exists){ ?>
+       var userAvPath ="/<?php echo Config::get("profiles.profiles_url"); ?>/display?ref=<?php echo \Crypt::encryptString(\Auth::user()->id); ?>";
+     <?php }else{?>
+       var userAvPath =null;
+     <?php } ?>
     </script>
     @yield(Config::get('profiles.yields.footer'))
 
