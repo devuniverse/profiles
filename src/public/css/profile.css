@@ -1,4 +1,4 @@
-.hidden{display: none;}
+.hidden{display: none !important;}
 .alert {
   font-family: sans-serif;
   padding: 15px;
@@ -396,6 +396,8 @@
     border-top: 10px solid #57DCD4;
     border-left: none;
     background-color: #E2FFFF;
+    position: relative;
+    z-index: 1;
 }
 .nav-holder ul li .fa {
     display: block;
@@ -424,11 +426,32 @@
     min-height: 53rem;
     box-shadow: 0 8px 10px 1px;
     padding: 1rem;
+    z-index: 0;
+    position: relative;
 }
+.fa.fa-pen.editimage {
+    z-index: 3;
+    position: absolute;
+    cursor: alias;
+}
+.fa.fa-pen.editimage {
+    z-index: 3; display: none;
+    position: absolute;
+    cursor: alias;
+    background-color: #fff;
+    padding: 11px;
+    border-radius: 50%;
+    left: 70px;
+    top: 15px;
+    border: 1px solid #eaeaea;
+}
+.photo__helper:hover .editimage{display: block;}
 #previewBtn {
     width: 12rem;
-    display: block;
-    margin: 16px auto;
+    margin: 16px auto;display: block;
+}
+.hidden {
+    display: none;
 }
 .row{
   margin-bottom: 1rem;
@@ -451,4 +474,10 @@ input[type="password"] {
 }
 .fullwidth {
     width: 100%;
+}
+#previewBtn .fa.fa-check {
+    background-color: #8AA73E;
+    padding: 6px;
+    margin-right: 6px;
+    border-radius: 50%;
 }

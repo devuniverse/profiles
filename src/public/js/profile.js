@@ -712,7 +712,7 @@ $(function() {
         var token = $('meta[name="csrf-token"]').prop('content');
         var urlX  = profilePath+'/update';
         dis.prepend('<i class="fa fa-spinner fa-spin"></i>');
-        $('.preview').show().attr('src',imageUrl);
+        // $('.preview').show().attr('src',imageUrl);
         $('input[name="imageurldata"]').val(imageUrl);
 
         $.ajax({
@@ -724,11 +724,24 @@ $(function() {
             },
             dataType: 'JSON',
             success: function(response) {
-              alert(JSON.stringify(response));
-              $('#previewBtn').find('i').remove();
+              if(response.msgtype==1){
+                $('#previewBtn').find('i').remove();
+                $('#previewBtn').prepend('<i class="fa fa-check"></i>');
+                setTimeout(function(){
+                  $('#previewBtn').find('i').remove();
+                  $('.photo__options').addClass('hidden');
+                  $('#previewBtn').addClass('hidden');
+                }, 3000);
+              }
             },
             error : function(errors){
-              alert(JSON.stringify(errors));
+              $('#previewBtn').find('i').remove();
+              $('#previewBtn').prepend('<i class="fa fa-times"></i>');
+              setTimeout(function(){
+                $('#previewBtn').find('i').remove();
+                $('.photo__options').addClass('hidden');
+                $('#previewBtn').addClass('hidden');
+              }, 3000);
             }
         });
 
@@ -737,12 +750,18 @@ $(function() {
     $('#uploadBtn').on('click', function() {
        $("#uploadExample").show();
     });
-    $('.nav-holder ul li').on('click', function(){
+    $(document).on('click','.nav-holder ul li', function(){
       var theContent = $(this).data('content');
-      $('.nav-holder ul li').removeClass('selected');
-      $(this).addClass('selected');
-      $('.tab-content').addClass('hidden');
-      $('.content-'+theContent).removeClass('hidden');
+      if( !$(this).hasClass('selected')){
+        $('.nav-holder ul li').removeClass('selected');
+        $(this).addClass('selected');
+        $('.tab-content').addClass('hidden');
+        $('.content-'+theContent).removeClass('hidden');
+      }
+    });
+    $(document).on('click', '.fa.fa-pen.editimage', function(event){
+      $('.photo__options').removeClass('hidden');
+      $('#previewBtn').removeClass('hidden');
     });
 
 });

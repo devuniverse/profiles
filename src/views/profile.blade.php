@@ -21,6 +21,15 @@
 @section(Config::get('profiles.yields.footer'))
   <script type="text/javascript">
     var profilePath = "/<?php echo \Config::get('profiles.profiles_url')?>";
+    <?php
+    $s3 = Storage::disk('s3');
+    $exists = $s3->exists($user->profile_picture);
+     if($exists){ ?>
+       var userAvPath ="/<?php echo Config::get("profiles.profiles_url"); ?>/display?ref=<?php echo \Crypt::encryptString(\Auth::user()->id); ?>";
+     <?php }else{?>
+       var userAvPath =null;
+     <?php } ?>
+    </script>
   </script>
   @if( Config::get('profiles.includes.jquery'))
     <script src="{{ url('/profiles/assets/js/jquery.js') }}"></script>
@@ -48,8 +57,9 @@
           <div class="photo">
             <input type="file" accept="image/*">
             <div class="photo__helper">
+                <i class="fa fa-pen editimage"></i>
                 <div class="photo__frame photo__frame--circle">
-                  <canvas class="photo__canvas"></canvas>
+                  <canvas class="photo__canvas" id="photo__canvas"></canvas>
                   <div class="message is-empty">
                       <p class="message--desktop">{{ _i('Drop your photo here or browse your computer') }}.</p>
                       <p class="message--mobile">{{ _i('Tap here to select your picture') }}.</p>
@@ -71,7 +81,7 @@
                   </div>
                 </div>
             </div>
-            <div class="photo__options hide">
+            <div class="photo__options hide animated slideInUp hidden">
                 <div class="photo__zoom">
                     <input type="range" class="zoom-handler">
                 </div><a href="javascript:;" class="remove"><i class="fa fa-trash"></i></a>
@@ -80,7 +90,7 @@
           <form class="update-profile-form" action="/{{ \Config::get('profiles.profiles_url') }}/update" method="post">
             @csrf
             <input type="hidden" name="imageurldata" value="">
-            <button type="submit" class="btn btn-primary" id="previewBtn"><?php echo _i('Preview'); ?></button>
+            <button type="submit" class="btn btn-primary animated slideInUp hidden" id="previewBtn"><?php echo _i('Update Avatar'); ?></button>
           </form>
           <div class="nav-holder">
             <ul>
