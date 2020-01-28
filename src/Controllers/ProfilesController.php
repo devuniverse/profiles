@@ -35,15 +35,18 @@ class ProfilesController extends Controller
       if($saved){
         $message = _i('Avatar changed successfully');
         $msgtype = 1;
+        $other = ['avatar_url'=> url($request->profilepref.'/'.Config::get("profiles.profiles_url").'/display?ref='.\Crypt::encryptString($user->id)) ];
       }else{
         $message = _i('Avatar may not be saved properly');
         $msgtype = 0;
+        $other = [];
       }
     }else{
       $message = _i('We encountered some ');
       $msgtype = 0;
+      $other = [];
     }
-    return response()->json(['message'=>$message, "msgtype"=>$msgtype]);
+    return response()->json(['message'=>$message, "msgtype"=>$msgtype, 'other'=>$other]);
   }
 
   public function display(Request $request){

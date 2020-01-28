@@ -721,12 +721,15 @@ $(function() {
             data: {
                 _token: token,
                 image: imageUrl,
+                profilepref: profilePrefix,
             },
             dataType: 'JSON',
             success: function(response) {
               if(response.msgtype==1){
                 $('#previewBtn').find('i').remove();
                 $('#previewBtn').prepend('<i class="fa fa-check"></i>');
+                var newAv= response.other.avatar_url;
+                $('.user-avatar').prop('src',newAv);
                 setTimeout(function(){
                   $('#previewBtn').find('i').remove();
                   $('.photo__options').addClass('hidden');
@@ -755,8 +758,8 @@ $(function() {
       if( !$(this).hasClass('selected')){
         $('.nav-holder ul li').removeClass('selected');
         $(this).addClass('selected');
-        $('.tab-content').addClass('hidden');
-        $('.content-'+theContent).removeClass('hidden');
+        $('.full-profile .tab-content').addClass('hidden');
+        $('.full-profile .content-'+theContent).removeClass('hidden');
       }
     });
     $(document).on('click', '.fa.fa-pen.editimage', function(event){

@@ -18,18 +18,38 @@
     <link rel="stylesheet" href="{{ url('/profiles/assets/css/desktop.css') }}">
 @endsection
 
+<?php
+  /* Depending on your route settings,remember to add this piece of code at the main layout file
+    * profilePrefix is optional, but may be userful in dynamic settings
+    * Define it before including the footer yields because the footer JS depends on it if it's defined
+    *
+    *
+  <script type="text/javascript">
+  var profilePrefix = "<?php echo '/'.\Request()->lang.'/manage' ?>";
+  </script>
+
+  @yield(Config::get('profiles.yields.footer'))
+   */
+?>
 @section(Config::get('profiles.yields.footer'))
   <script type="text/javascript">
-    var profilePath = "/<?php echo \Config::get('profiles.profiles_url')?>";
-    <?php
-    $s3 = Storage::disk('s3');
-    $exists = $s3->exists($user->profile_picture);
-     if($exists){ ?>
-       var userAvPath ="/<?php echo Config::get("profiles.profiles_url"); ?>/display?ref=<?php echo \Crypt::encryptString(\Auth::user()->id); ?>";
-     <?php }else{?>
-       var userAvPath =null;
-     <?php } ?>
-    </script>
+  if(profilePrefix!==""){
+    var profilePath = profilePrefix + "<?php echo '/'.\Config::get('profiles.profiles_url')?>";
+  }else{
+    var profilePath = "<?php echo '/'.\Config::get('profiles.profiles_url')?>";
+  }
+  <?php
+  $s3 = Storage::disk('s3');
+  $exists = $s3->exists($user->profile_picture);
+   if($exists){ ?>
+     if(profilePrefix!==""){
+       var userAvPath = profilePrefix +"/<?php echo Config::get("profiles.profiles_url"); ?>/display?ref=<?php echo \Crypt::encryptString(\Auth::user()->id); ?>";
+     }else{
+       var userAvPath = "/<?php echo Config::get("profiles.profiles_url"); ?>/display?ref=<?php echo \Crypt::encryptString(\Auth::user()->id); ?>";
+     }
+   <?php }else{?>
+     var userAvPath =null;
+   <?php } ?>
   </script>
   @if( Config::get('profiles.includes.jquery'))
     <script src="{{ url('/profiles/assets/js/jquery.js') }}"></script>
@@ -81,7 +101,7 @@
                   </div>
                 </div>
             </div>
-            <div class="photo__options hide animated slideInUp hidden">
+            <div class="photo__options animated slideInUp hidden">
                 <div class="photo__zoom">
                     <input type="range" class="zoom-handler">
                 </div><a href="javascript:;" class="remove"><i class="fa fa-trash"></i></a>
