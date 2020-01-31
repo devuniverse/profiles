@@ -205,7 +205,6 @@
 }
 .photo {
   text-align: center;
-  margin-bottom: 15px;
 }
 .photo input[type="file"] {
   display: none;
@@ -392,31 +391,96 @@
     background-color: #EBEBEB;
 }
 .nav-holder .selected {
-    color: #57DCD4;
-    border-top: 10px solid #57DCD4;
     border-left: none;
-    background-color: #E2FFFF;
     position: relative;
-    z-index: 1;
+    z-index: 1;background-color: #fff;
 }
 .nav-holder ul li .fa {
-    display: block;
-    margin: auto;
     text-align: center; float: none;
+    font-size: 12px;
+    display: block !important;
+    margin: auto !important;
+    float: none !important;
 }
 .nav-holder ul li {
-    background-color: #EBEBEB;
+    background-color: #F6F6F6;
     min-height: 1rem;
     font-size: 1.5rem;
-    padding: 1rem 1rem 1rem 1rem;
     cursor: pointer;
     width: 5.5rem;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: middle;margin-bottom: 2px;
 }
 .nav-holder ul li span{ display: none;}
 .pb-4, .py-4 {
     padding-bottom: 0rem !important;
+}
+.nav-holder .the-left {
+  background-color:#EAEAEA;
+  display: inline-block;
+  width: 40px;
+  height: 40px;vertical-align: middle;
+  padding: 14px 15px 8px 15px;text-align: center;
+  border-left: 6px solid #5F6F81;
+}
+.selected .the-left {
+    border-left-color:#A0C23D;
+}
+.full-profile {
+    background-color:#FEFEFE;
+}
+.theinput input, .theinput textarea {
+    width: 100%;
+}
+.theinput {
+    padding: 1px 8px;vertical-align: middle;
+}
+.thelabel.cell {
+  display: inline-block;
+  vertical-align: middle;
+  background-color:#5F6F81;
+  min-height: 47px;
+  padding-top: 14px;
+  color:#fff;
+  text-align: center;
+}
+.thelabel.cell label{
+  margin-bottom:0;
+}
+.nav-holder .the-right {
+  width: 80%;vertical-align: middle;display: inline-block;
+  text-align: left;padding-left: 8px;font-size: 15px;
+}
+.profile-left {
+    background-color:#f6f6f6;
+    height: auto;
+    display: inline-block;
+    min-height: 72em;
+}
+.user-avatarshow .avatar-img {
+    width: 265px;
+    display: inline-block;border-radius: 4px;
+}
+.user-avatarshow {
+    position: relative;
+}
+.user-avatarshow .fa.fa-spinner.fa-spin {
+    position: absolute;
+    color:#000;
+    font-size: 23px;
+    left: 45%;
+    top: 45%;
+}
+.profile-inner h1 {
+    color:#C6C8C7;
+    font-size: 29px;
+}
+.tab-content {
+    background: none;
+}
+.infosection {
+    display: block;
+    width: 100%;
 }
 .pt-4, .py-4 {
     padding-top: 0rem !important;
@@ -424,10 +488,12 @@
 .profile-sidemain {
     background-color: #fff;
     min-height: 53rem;
-    box-shadow: 0 8px 10px 1px;
     padding: 1rem;
     z-index: 0;
     position: relative;
+}
+.nav-holder {
+    background-color:#FBFBFB;
 }
 .fa.fa-pen.editimage {
     z-index: 3;
@@ -480,4 +546,9 @@ input[type="password"] {
     padding: 6px;
     margin-right: 6px;
     border-radius: 50%;
+}
+input[type="text"], input[type="number"], input[type="email"] {
+    padding: 14px;
+    border-radius: 0.2rem;
+    border: 1px dashed #B1B1B1;
 }

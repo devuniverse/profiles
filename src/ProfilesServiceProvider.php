@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Auth;
 
 class ProfilesServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,7 @@ class ProfilesServiceProvider extends ServiceProvider
       $this->publishes([
         __DIR__.'/Config/profiles.php' => config_path('profiles.php'),
         __DIR__.'/public' => public_path('profiles/assets'),
+        __DIR__.'/config/extraobjects.php' => base_path('bootstrap/extraobjects.php'),
       ]);
       // $this->publishes([
       //     __DIR__.'/database/' => database_path(),
@@ -32,8 +34,13 @@ class ProfilesServiceProvider extends ServiceProvider
       view()->composer('*', function ($view){
        $request =  Request();
        if(\Auth::check()){
-
-
+         $user = Auth::user();
+         $metas =[];
+         foreach (\Devuniverse\Profiles\Models\Usermeta::where('user_id', $user->id)->get() as $key => $meta) {
+           $metas[$meta->meta_key] = $meta->meta_value;
+         }
+         $user['metas'] = $metas;
+         $view->with('ppuser', $user);
        };
       });
 

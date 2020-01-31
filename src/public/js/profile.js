@@ -766,5 +766,10 @@ $(function() {
       $('.photo__options').removeClass('hidden');
       $('#previewBtn').removeClass('hidden');
     });
-
+    $( document ).ready(function() {
+      $('.user-avatarshow .avatar-img').prop("src",avPath);
+      setTimeout(function(){
+        $('.user-avatarshow').find('i').remove();
+      },700);
+    });
 });

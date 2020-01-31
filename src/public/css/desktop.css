@@ -1,4 +1,9 @@
 @media only screen and (min-width: 60em){
-
+  .nav-holder .the-left {
+    width: 19.95%;
+  }
+  .nav-holder .the-right {
+    width: 80%;
+  }
 
 }
