@@ -112,6 +112,7 @@ $extraMenus = $profiles::extras();
                 <div class="photo__zoom">
                   <input type="range" class="zoom-handler">
                 </div><a href="javascript:;" class="remove"><i class="fa fa-trash"></i></a>
+                <button type="submit" class="btn btn-primary animated slideInUp" id="previewBtn">{{ _i('Update Avatar') }}</button>
               </div>
             </div>
             <div class="nav-holder">
@@ -257,7 +258,7 @@ $extraMenus = $profiles::extras();
 
     <div class="previews-container">
     </div>
-    <!-- <button type="button" class="btn btn-primary" id="uploadBtn">Upload Example</button> -->
+    <button type="button" class="btn btn-primary" id="uploadBtn">Upload Example</button>
   </div>
 
 @endsection
