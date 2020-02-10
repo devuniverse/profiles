@@ -393,7 +393,7 @@
 .nav-holder .selected {
     border-left: none;
     position: relative;
-    z-index: 1;background-color: #fff;
+    z-index: 1;
 }
 .nav-holder ul li .fa {
     text-align: center; float: none;
@@ -550,5 +550,5 @@ input[type="password"] {
 input[type="text"], input[type="number"], input[type="email"] {
     padding: 14px;
     border-radius: 0.2rem;
-    border: 1px dashed #B1B1B1;
+    border: 1px solid #A27CE6;
 }
