@@ -783,11 +783,13 @@ $(function() {
         const dis= $(this); 
         const newpass = dis.find(':input[name="userinfo[user][newpassword]"]').val();
         const confirmpass = dis.find(':input[name="userinfo[user][passwordconfirm]"]').val();
-        if( (newpass !== "" || confirmpass !== "") && newpass !== confirmpass){
+        if( (newpass !== "" && confirmpass !== "") && newpass !== confirmpass){
          e.preventDefault();
          $('.password.messages').removeClass("hidden").find('.alert').addClass('alert-danger alert-dismissible').find('.alert-content').html(notMatched);
+         $('.updatecta .btn.btn-primary').find('i').remove();
+        }else{
+            dis.find(".updatecta .btn.btn-primary").prepend('<i class="fa fa-spinner fa-spin"></i>');
         }
-        dis.find(".updatecta .btn.btn-primary").prepend('<i class="fa fa-spinner fa-spin"></i>');
     });
       // $('.td-inner select').prop('disabled', true);
    $(document).on("click",'.theinput', function(){

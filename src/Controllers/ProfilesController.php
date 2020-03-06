@@ -14,6 +14,7 @@ use Auth;
 use Hash;
 use Crypt;
 use Illuminate\Support\Facades\Storage;
+use Devuniverse\Profiles\Models\Usermeta;
 
 class ProfilesController extends Controller
 {
@@ -101,13 +102,13 @@ class ProfilesController extends Controller
     $useri = $request->userinfo;
 
     $lastname = $useri['user']['lastname'];
-    $currentpass = $useri['user']['currentpassword'];
-    $newpass = $useri['user']['newpassword'];
-    $confirmpass = $useri['user']['passwordconfirm'];
+    $currentpass = !empty($useri['user']['currentpassword']) ? $useri['user']['currentpassword'] : "";
+    $newpass = !empty($useri['user']['newpassword']) ? $useri['user']['newpassword'] : "";
+    $confirmpass = !empty($useri['user']['passwordconfirm']) ? $useri['user']['passwordconfirm'] : "";
     /**
      * If the password is being changed
      */
-    if(isset($currentpass) && isset($newpass) && isset($confirmpass)){
+    if(!empty($currentpass) && !empty($newpass) && !empty($confirmpass)){
       if (!\Hash::check($currentpass, $user->password)) {
         $message = _i("Current password is not correct");
         $msgtype = 0;
@@ -132,13 +133,26 @@ class ProfilesController extends Controller
       $userinfox = $useri['user'];
       $usermeta = $useri['meta'];
       foreach($userinfox as $u => $x){
-
+        $user->$u = $x;
+        $user->save();
       }
 
       foreach($usermeta as $x => $meta){
-
+        if(!empty($meta)){
+          $umeta = Usermeta::where("user_id",$user->id)->where("meta_key",$x)->first();
+          if($umeta){
+            $umeta->meta_value = $meta;
+            $saved = $umeta->save();
+          }else{
+            $umetaNew = new Usermeta();
+            $umetaNew->user_id     = $user->id;
+            $umetaNew->meta_key    = $x;
+            $umetaNew->meta_value  = $meta;
+            $saved = $umetaNew->save();
+          }
+        }
       }
-      $message = _i("Between Us");
+      $message = _i("Account saved successfully");
       $msgtype = 1;
     }
 

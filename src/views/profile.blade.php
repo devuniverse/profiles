@@ -78,7 +78,10 @@ $extraMenus = $profiles::extras();
 
     </div> -->
     <div class="profile">
-      <form class="update-profileinfo" action="{{ url(Config::get('profiles.profiles_prefix').'/'.Config::get('profiles.profiles_url').'/update/userinfo' ) }}" method="post">
+    <?php 
+      $profilesPath = Config::get('profiles.profiles_url');
+    ?>
+      <form class="update-profileinfo" action="{{ url(Config::get('profiles.profiles_url').'/update/userinfo' ) }}" method="post">
         @csrf
         <input type="hidden" name="backto" value="{{ url()->current() }}"/>
         <div class="profile-left cell nexus--1-6">
@@ -220,7 +223,7 @@ $extraMenus = $profiles::extras();
               <div class="hidden tab-content content-socialnetworks">
                 <div class="row-content">
                   <div class="inputcontent row">
-                    <h1>{{ _i("Social Networks") }}</h1>
+                    <h1>{{ _i("Social Networks") }}</h1> 
                     <div class="infosection socialnetworks-inner">
                       <div class="cell nexus--1-2 field-cont">
                         <div class="thelabel cell nexus--1-3 hand--1-3">
