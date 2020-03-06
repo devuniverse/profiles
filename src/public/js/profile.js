@@ -765,6 +765,7 @@ $(function() {
     $(document).on('click', '.fa.fa-pen.editimage', function(event){
       $('.photo__options').removeClass('hidden');
       $('#previewBtn').removeClass('hidden');
+ 
     });
     $( document ).ready(function() {
       $('.user-avatarshow .avatar-img').prop("src",avPath);
@@ -772,4 +773,27 @@ $(function() {
         $('.user-avatarshow').find('i').remove();
       },700);
     });
+
+    /**
+     * Custom Profile scripts
+     */
+    const doc = $(document);
+
+    doc.on("submit", ".update-profileinfo", function(e){
+        const dis= $(this); 
+        const newpass = dis.find(':input[name="userinfo[user][newpassword]"]').val();
+        const confirmpass = dis.find(':input[name="userinfo[user][passwordconfirm]"]').val();
+        if( (newpass !== "" || confirmpass !== "") && newpass !== confirmpass){
+         e.preventDefault();
+         $('.password.messages').removeClass("hidden").find('.alert').addClass('alert-danger alert-dismissible').find('.alert-content').html(notMatched);
+        }
+        dis.find(".updatecta .btn.btn-primary").prepend('<i class="fa fa-spinner fa-spin"></i>');
+    });
+      // $('.td-inner select').prop('disabled', true);
+   $(document).on("click",'.theinput', function(){
+      const dis = $(this);
+      dis.find(':input[type="password"]').prop('disabled', false);
+      dis.addClass("editable");
+   });
+
 });

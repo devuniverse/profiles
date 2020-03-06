@@ -552,3 +552,28 @@ input[type="text"], input[type="number"], input[type="email"] {
     border-radius: 0.2rem;
     border: 1px solid #A27CE6;
 }
+.updatecta .btn.btn-primary {
+  position: fixed;
+  right: 0;
+  bottom: 1em;
+  font-size: 1.6em;
+  padding: 11px 57px;
+}
+.theinput::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}.theinput.editable::before {
+  z-index: -1 !important;
+}
+.field-cont {
+  margin-bottom: 5px;
+}
+.action.knowledge{
+  margin-top: 10px;
+}
+.action.knowledge p {
+  color:#343a40;font-size: 19px;
+}

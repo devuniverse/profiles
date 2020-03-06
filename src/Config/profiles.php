@@ -8,11 +8,17 @@ return [
   /**
    *|
    */
+  "profiles_prefix"      => "",
+    /**
+   *|
+   */
   "profiles_url"      => "profile",
   /**
    *|
    */
   "master_file_extend" => "profiles::main",
+
+  
 
   // "default_file_system" => "public",
   /**

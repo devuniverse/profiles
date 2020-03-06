@@ -34,9 +34,9 @@
 @section(Config::get('profiles.yields.footer'))
   <script type="text/javascript">
   if(profilePrefix!==""){
-    var profilePath = profilePrefix + "<?php echo '/'.\Config::get('profiles.profiles_url')?>";
+    var profilePath = profilePrefix + "<?php echo '/'.\Config::get('profiles.profiles_url'); ?>";
   }else{
-    var profilePath = "<?php echo '/'.\Config::get('profiles.profiles_url')?>";
+    var profilePath = "<?php echo '/'.\Config::get('profiles.profiles_url'); ?>";
   }
   <?php
   $s3 = Storage::disk('s3');
@@ -52,6 +52,7 @@
      var userAvPath=null;
      var avPath = '/images/user.png';
    <?php } ?>
+    var notMatched = "{{ _i('The passwords do not match') }} ";
   </script>
   @if( Config::get('profiles.includes.jquery'))
     <script src="{{ url('/profiles/assets/js/jquery.js') }}"></script>
@@ -77,8 +78,9 @@ $extraMenus = $profiles::extras();
 
     </div> -->
     <div class="profile">
-      <form class="update-profileinfo" action="" method="post">
+      <form class="update-profileinfo" action="{{ url(Config::get('profiles.profiles_prefix').'/'.Config::get('profiles.profiles_url').'/update/userinfo' ) }}" method="post">
         @csrf
+        <input type="hidden" name="backto" value="{{ url()->current() }}"/>
         <div class="profile-left cell nexus--1-6">
           <div class="profile-inner">
             <div class="photo">
@@ -152,7 +154,7 @@ $extraMenus = $profiles::extras();
                       <div class="thelabel cell nexus--1-3 hand--1-3">
                         <label for="userinfo[user][email]">{{ _i("Email") }}</label>
                       </div><div class="theinput cell nexus--2-3 hand--2-3">
-                        <input type="text" readonly disabled name="userinfo[user][email]" value="{{ $ppuser->email }}">
+                        <input type="text" disabled name="userinfo[user][email]" value="{{ $ppuser->email }}">
                       </div>
                     </div><div class="cell nexus--1-2 field-cont">
                       <div class="thelabel cell nexus--1-3 hand--1-3">
@@ -186,21 +188,31 @@ $extraMenus = $profiles::extras();
                       <div class="thelabel cell nexus--1-3 hand--1-3">
                         <label for="userinfo[user][email]">{{ _i("Current password") }}</label>
                       </div><div class="theinput cell nexus--2-3 hand--2-3">
-                        <input type="password" readonly disabled name="userinfo[user][currentpassword]" value="">
+                        <input type="password" disabled name="userinfo[user][currentpassword]" value="">
                       </div>
                     </div><div class="cell nexus--1-2 field-cont">
                       <div class="thelabel cell nexus--1-3 hand--1-3">
                         <label for="userinfo[user][email]">{{ _i("New Password") }}</label>
                       </div><div class="theinput cell nexus--2-3 hand--2-3">
-                        <input type="password" readonly disabled name="userinfo[user][newpassword]" value="">
+                        <input type="password" disabled name="userinfo[user][newpassword]" value="">
                       </div>
                     </div><div class="cell nexus--1-2 field-cont">
                       <div class="thelabel cell nexus--1-3 hand--1-3">
                         <label for="userinfo[user][email]">{{ _i("Confirm password") }}</label>
                       </div><div class="theinput cell nexus--2-3 hand--2-3">
-                        <input type="password" readonly disabled name="userinfo[user][passwordconfirm]" value="">
+                        <input type="password" disabled name="userinfo[user][passwordconfirm]" value="">
                       </div>
                     </div>
+                  </div>
+                  <div class="action knowledge">
+                    <div class="password messages hidden">
+                      <div class="alert ">
+                        
+                        <div class="alert-content"></div>
+                      </div>
+                    </div>
+                    <p>{{ _i("Once you change your password, you will be logged out.") }}</p>
+                    <p>{{ _i("You will need to log back in.") }}</p>
                   </div>
                 </div>
               </div>
@@ -252,13 +264,15 @@ $extraMenus = $profiles::extras();
               @endforeach
             </div>
           </div>
+        <div class="updatecta">
+          <button class="btn btn-primary" type="submit">{{ _i("Update") }}</button>
+        </div>
         </div>
       </form>
     </div>
 
     <div class="previews-container">
     </div>
-    <button type="button" class="btn btn-primary" id="uploadBtn">Upload Example</button>
   </div>
 
 @endsection

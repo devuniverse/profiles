@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 use Config;
 use Auth;
+use Hash;
 use Crypt;
 use Illuminate\Support\Facades\Storage;
 
@@ -87,6 +88,61 @@ class ProfilesController extends Controller
       }
       fclose($fpOrigin);
     }
+
+  }
+  /**
+   * @method updateUserInfo
+   * @param $request
+   * @description : Update user information
+   * @return binary / redirect
+   */
+  public function updateUserInfo(Request $request){
+    $user = Auth::user();
+    $useri = $request->userinfo;
+
+    $lastname = $useri['user']['lastname'];
+    $currentpass = $useri['user']['currentpassword'];
+    $newpass = $useri['user']['newpassword'];
+    $confirmpass = $useri['user']['passwordconfirm'];
+    /**
+     * If the password is being changed
+     */
+    if(isset($currentpass) && isset($newpass) && isset($confirmpass)){
+      if (!\Hash::check($currentpass, $user->password)) {
+        $message = _i("Current password is not correct");
+        $msgtype = 0;
+      }else{
+        if($newpass != $confirmpass){
+          $message = _i("Your passwords do not match");
+          $msgtype = 0;
+        }else{
+          $user->password = Hash::make($newpass);
+          $user->save();
+          $message = _i("Password updated successfully");
+          $msgtype = 1;
+          Auth::logout();
+        }
+      } 
+    }
+    /**
+     * The password hasn't changed
+     */
+    else
+    {
+      $userinfox = $useri['user'];
+      $usermeta = $useri['meta'];
+      foreach($userinfox as $u => $x){
+
+      }
+
+      foreach($usermeta as $x => $meta){
+
+      }
+      $message = _i("Between Us");
+      $msgtype = 1;
+    }
+
+    return redirect()->back()->with('theresponse', ["message"=>$message, "msgtype"=>$msgtype]);
 
   }
 }
