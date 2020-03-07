@@ -201,7 +201,7 @@
   position: relative;
   font-family: "HelveticaNeueLTPro-Roman", sans-serif;
   font-size: 85%;
-  width: 100%;
+  width: 100%; overflow: hidden;
 }
 .photo {
   text-align: center;
@@ -559,13 +559,13 @@ input[type="text"], input[type="number"], input[type="email"] {
   font-size: 1.6em;
   padding: 11px 57px;
 }
-.theinput::before {
+.theinput.xpass::before {
   position: absolute;
   content: "";
   width: 100%;
   height: 100%;
   z-index: 1;
-}.theinput.editable::before {
+}.theinput.xpass.editable::before {
   z-index: -1 !important;
 }
 .field-cont {

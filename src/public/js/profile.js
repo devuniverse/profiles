@@ -765,7 +765,7 @@ $(function() {
     $(document).on('click', '.fa.fa-pen.editimage', function(event){
       $('.photo__options').removeClass('hidden');
       $('#previewBtn').removeClass('hidden');
- 
+
     });
     $( document ).ready(function() {
       $('.user-avatarshow .avatar-img').prop("src",avPath);
@@ -780,7 +780,7 @@ $(function() {
     const doc = $(document);
 
     doc.on("submit", ".update-profileinfo", function(e){
-        const dis= $(this); 
+        const dis= $(this);
         const newpass = dis.find(':input[name="userinfo[user][newpassword]"]').val();
         const confirmpass = dis.find(':input[name="userinfo[user][passwordconfirm]"]').val();
         if( (newpass !== "" && confirmpass !== "") && newpass !== confirmpass){
@@ -792,7 +792,7 @@ $(function() {
         }
     });
       // $('.td-inner select').prop('disabled', true);
-   $(document).on("click",'.theinput', function(){
+   $(document).on("click",'.theinput.xpass', function(){
       const dis = $(this);
       dis.find(':input[type="password"]').prop('disabled', false);
       dis.addClass("editable");

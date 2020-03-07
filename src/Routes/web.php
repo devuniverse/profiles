@@ -7,14 +7,15 @@
 //   /**
 //    * GET ROUTES
 //    */
-//   Route::get('/', 'Devuniverse\Profiles\Controllers\ProfilesController@loadIndex');
-//   Route::get('create', 'Devuniverse\Profiles\Controllers\ProfilesController@create')->name('profiles.create');
-//   Route::get('showfiles', 'Devuniverse\Profiles\Controllers\ProfilesController@index')->name('load.profiles.index');
-//   Route::get('display', 'Devuniverse\Profiles\Controllers\ProfilesController@display')->name('load.images.display');
-//
+//   Route::get('/', '\Devuniverse\Profiles\Controllers\ProfilesController@loadIndex');
+//   Route::get('create', '\Devuniverse\Profiles\Controllers\ProfilesController@create')->name('profiles.create');
+//   Route::get('showfiles', '\Devuniverse\Profiles\Controllers\ProfilesController@index')->name('load.profiles.index');
+//   Route::get('display', '\Devuniverse\Profiles\Controllers\ProfilesController@display')->name('load.images.display');
+
 //   /**
 //   * POST ROUTES
 //   */
-//   Route::post('update', 'Devuniverse\Profiles\Controllers\ProfilesController@updateAvatar');
-//
+//   Route::post('update', '\Devuniverse\Profiles\Controllers\ProfilesController@updateAvatar');
+//   Route::post('update/userinfo', '\Devuniverse\Profiles\Controllers\ProfilesController@updateUserInfo')->name('profiles.update.info');
+
 // });

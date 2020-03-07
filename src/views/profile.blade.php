@@ -78,10 +78,7 @@ $extraMenus = $profiles::extras();
 
     </div> -->
     <div class="profile">
-    <?php 
-      $profilesPath = Config::get('profiles.profiles_url');
-    ?>
-      <form class="update-profileinfo" action="{{ url(Config::get('profiles.profiles_url').'/update/userinfo' ) }}" method="post">
+      <form class="update-profileinfo" action="{{ route('profiles.update.info', \Request()->route()->parameters() ) }}" method="post">
         @csrf
         <input type="hidden" name="backto" value="{{ url()->current() }}"/>
         <div class="profile-left cell nexus--1-6">
@@ -190,19 +187,19 @@ $extraMenus = $profiles::extras();
                     <div class="cell nexus--1-2 field-cont">
                       <div class="thelabel cell nexus--1-3 hand--1-3">
                         <label for="userinfo[user][email]">{{ _i("Current password") }}</label>
-                      </div><div class="theinput cell nexus--2-3 hand--2-3">
+                      </div><div class="theinput xpass cell nexus--2-3 hand--2-3">
                         <input type="password" disabled name="userinfo[user][currentpassword]" value="">
                       </div>
                     </div><div class="cell nexus--1-2 field-cont">
                       <div class="thelabel cell nexus--1-3 hand--1-3">
                         <label for="userinfo[user][email]">{{ _i("New Password") }}</label>
-                      </div><div class="theinput cell nexus--2-3 hand--2-3">
+                      </div><div class="theinput xpass cell nexus--2-3 hand--2-3">
                         <input type="password" disabled name="userinfo[user][newpassword]" value="">
                       </div>
                     </div><div class="cell nexus--1-2 field-cont">
                       <div class="thelabel cell nexus--1-3 hand--1-3">
                         <label for="userinfo[user][email]">{{ _i("Confirm password") }}</label>
-                      </div><div class="theinput cell nexus--2-3 hand--2-3">
+                      </div><div class="theinput xpass cell nexus--2-3 hand--2-3">
                         <input type="password" disabled name="userinfo[user][passwordconfirm]" value="">
                       </div>
                     </div>
@@ -210,7 +207,7 @@ $extraMenus = $profiles::extras();
                   <div class="action knowledge">
                     <div class="password messages hidden">
                       <div class="alert ">
-                        
+
                         <div class="alert-content"></div>
                       </div>
                     </div>
@@ -223,7 +220,7 @@ $extraMenus = $profiles::extras();
               <div class="hidden tab-content content-socialnetworks">
                 <div class="row-content">
                   <div class="inputcontent row">
-                    <h1>{{ _i("Social Networks") }}</h1> 
+                    <h1>{{ _i("Social Networks") }}</h1>
                     <div class="infosection socialnetworks-inner">
                       <div class="cell nexus--1-2 field-cont">
                         <div class="thelabel cell nexus--1-3 hand--1-3">

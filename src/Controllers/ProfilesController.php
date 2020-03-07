@@ -123,7 +123,7 @@ class ProfilesController extends Controller
           $msgtype = 1;
           Auth::logout();
         }
-      } 
+      }
     }
     /**
      * The password hasn't changed
@@ -132,6 +132,10 @@ class ProfilesController extends Controller
     {
       $userinfox = $useri['user'];
       $usermeta = $useri['meta'];
+      unset($userinfox['currentpassword']);
+      unset($userinfox['newpassword']);
+      unset($userinfox['passwordconfirm']);
+
       foreach($userinfox as $u => $x){
         $user->$u = $x;
         $user->save();
