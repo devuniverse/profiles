@@ -1,9 +1,15 @@
-@media only screen and (min-width: 60em){
+@media only screen and (min-width: 960px){
   .nav-holder .the-left {
     width: 19.95%;
   }
   .nav-holder .the-right {
     width: 80%;
-  }
 
+  }
+  .nav-holder .the-right {display: inline-block;}
+  .nav-holder ul li {width: 100%;}
+  .nav-holder .the-left {border-left: 6px solid#5F6F81;border-top: none; padding: 16px 8px 19px 6px;}
+  .selected .the-left {border-left-color:#A0C23D; border-top: none;}
+  .nav-holder .the-left {height: 50px;}
+  .nav-holder ul li .fa {font-size: 18px;}
 }

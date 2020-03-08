@@ -1,6 +1,9 @@
-@media only screen and (min-width: 40em){
-  .nav-holder ul li {width: 100%; }
+@media only screen and (min-width: 768px){
+  /* .nav-holder ul li {width: 100%; } */
+  .nav-holder ul li {width: 7.5rem;}
   .nav-holder ul li span{ display: inline-block;}
   .nav-holder .selected {border-top: none;}
   .nav-holder ul li .fa {display: inline-block;margin: auto;text-align: center;float: left;}
+  .nav-holder .the-left {height: 60px;}
+  .nav-holder ul li .fa {font-size: 21px;}
 }

@@ -81,7 +81,7 @@ $extraMenus = $profiles::extras();
       <form class="update-profileinfo" action="{{ route('profiles.update.info', \Request()->route()->parameters() ) }}" method="post">
         @csrf
         <input type="hidden" name="backto" value="{{ url()->current() }}"/>
-        <div class="profile-left cell nexus--1-6">
+        <div class="profile-left cell nexus--1-4">
           <div class="profile-inner">
             <div class="photo">
               <input type="file" accept="image/*">
@@ -128,7 +128,7 @@ $extraMenus = $profiles::extras();
               </ul>
             </div>
           </div>
-        </div><div class="cell nexus--5-6 profile-sidemain">
+        </div><div class="cell nexus--3-4 profile-sidemain">
           <div class="profile-inner">
             <div class="messages-alerts">
               @if( !empty(Session::get('theresponse')) )
