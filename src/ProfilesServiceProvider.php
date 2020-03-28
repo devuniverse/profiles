@@ -23,6 +23,8 @@ class ProfilesServiceProvider extends ServiceProvider
         __DIR__.'/Config/profiles.php' => config_path('profiles.php'),
         __DIR__.'/public' => public_path('profiles/assets'),
         __DIR__.'/config/extraobjects.php' => base_path('bootstrap/extraobjects.php'),
+        __DIR__.'/views' => base_path('resources/views/vendor/profiles'),
+
       ]);
       // $this->publishes([
       //     __DIR__.'/database/' => database_path(),
