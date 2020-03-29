@@ -135,12 +135,12 @@ $extraMenus = $profiles::extras();
               @if(Session::get('theresponse')["msgtype"]==1)
               <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <strong>Well done!</strong> {{ Session::get('theresponse')["message"] }}
+                <strong>{{ _i("Well done") }}!</strong> {{ Session::get('theresponse')["message"] }}
               </div>
               @else
               <div class="alert alert-danger">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <strong>Error!</strong> {{ Session::get('theresponse')["message"] }}
+                <strong>{{ _i("Error") }}!</strong> {{ Session::get('theresponse')["message"] }}
               </div>
               @endif
               @endif
@@ -188,19 +188,19 @@ $extraMenus = $profiles::extras();
                       <div class="thelabel cell nexus--1-3 hand--1-3">
                         <label for="userinfo[user][email]">{{ _i("Current password") }}</label>
                       </div><div class="theinput xpass cell nexus--2-3 hand--2-3">
-                        <input type="password" disabled name="userinfo[user][currentpassword]" value="">
+                        <input type="password" name="userinfo[user][currentpassword]" value="">
                       </div>
                     </div><div class="cell nexus--1-2 field-cont">
                       <div class="thelabel cell nexus--1-3 hand--1-3">
                         <label for="userinfo[user][email]">{{ _i("New Password") }}</label>
                       </div><div class="theinput xpass cell nexus--2-3 hand--2-3">
-                        <input type="password" disabled name="userinfo[user][newpassword]" value="">
+                        <input type="password" name="userinfo[user][newpassword]" value="">
                       </div>
                     </div><div class="cell nexus--1-2 field-cont">
                       <div class="thelabel cell nexus--1-3 hand--1-3">
                         <label for="userinfo[user][email]">{{ _i("Confirm password") }}</label>
                       </div><div class="theinput xpass cell nexus--2-3 hand--2-3">
-                        <input type="password" disabled name="userinfo[user][passwordconfirm]" value="">
+                        <input type="password" name="userinfo[user][passwordconfirm]" value="">
                       </div>
                     </div>
                   </div>
