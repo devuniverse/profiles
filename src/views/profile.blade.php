@@ -172,7 +172,7 @@ $extraMenus = $profiles::extras();
                       <div class="thelabel cell nexus--1-3 hand--1-3">
                         <label for="userinfo[user][phone]">{{ _i("Telephone") }}</label>
                       </div><div class="theinput cell nexus--2-3 hand--2-3">
-                        <input type="number" required name="userinfo[meta][phone]" value="{{ isset($ppuser->metas['phone']) ? $ppuser->metas['phone']:'' }}">
+                        <input type="number"  name="userinfo[meta][phone]" value="{{ isset($ppuser->metas['phone']) ? $ppuser->metas['phone']:'' }}">
                       </div>
                     </div>
                   </div>

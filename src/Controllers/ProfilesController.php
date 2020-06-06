@@ -130,6 +130,7 @@ class ProfilesController extends Controller
      */
     else
     {
+      $saved = null;
       $userinfox = $useri['user'];
       $usermeta = $useri['meta'];
       unset($userinfox['currentpassword']);
@@ -138,26 +139,37 @@ class ProfilesController extends Controller
 
       foreach($userinfox as $u => $x){
         $user->$u = $x;
-        $user->save();
+        $saved = $user->save();
       }
 
       foreach($usermeta as $x => $meta){
+        //$useri["meta"]["notify_tag_task"]
         if(!empty($meta)){
           $umeta = Usermeta::where("user_id",$user->id)->where("meta_key",$x)->first();
-          if($umeta){
-            $umeta->meta_value = $meta;
-            $saved = $umeta->save();
-          }else{
+          if( ! $umeta){
+
             $umetaNew = new Usermeta();
             $umetaNew->user_id     = $user->id;
             $umetaNew->meta_key    = $x;
             $umetaNew->meta_value  = $meta;
             $saved = $umetaNew->save();
+            
+          }else{
+
+            $umeta->meta_value = $meta;
+            $saved = $umeta->save();
+          
           }
         }
       }
-      $message = _i("Account saved successfully");
-      $msgtype = 1;
+      if($saved){
+        $message = _i("Account saved successfully");
+        $msgtype = 1;
+      }else{
+        $message = _i("There were some issues saving info");
+        $msgtype = 0;
+      }
+ 
     }
 
     return redirect()->back()->with('theresponse', ["message"=>$message, "msgtype"=>$msgtype]);
